@@ -1,11 +1,20 @@
-import React from 'react';
+import React, { useCallback } from "react";
+import { useDispatch } from "react-redux";
+import { buyItem } from "../actions/featureActions";
 
-const AdditionalFeature = props => {
+const AdditionalFeature = ({ feature }) => {
+  const dispatch = useDispatch();
+  const buyThis = useCallback(() => dispatch(buyItem(feature)), [
+    dispatch,
+    feature
+  ]);
+
   return (
     <li>
-      {/* Add an onClick that will let you add a feature to your car */}
-      <button className="button">Add</button>
-      {props.feature.name} (+{props.feature.price})
+      <button className="button" onClick={buyThis}>
+        Add
+      </button>
+      {feature.name} (+{feature.price})
     </li>
   );
 };
